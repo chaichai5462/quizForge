@@ -1,0 +1,455 @@
+# 🧠 QuizForge — AI-Powered Academic Quiz Platform
+
+<div align="center">
+
+![QuizForge Banner](https://img.shields.io/badge/QuizForge-AI%20Quiz%20Platform-6C63FF?style=for-the-badge&logo=brain&logoColor=white)
+
+[![React](https://img.shields.io/badge/React-18.0-61DAFB?style=flat-square&logo=react)](https://react.dev)
+[![Firebase](https://img.shields.io/badge/Firebase-10.0-FFCA28?style=flat-square&logo=firebase)](https://firebase.google.com)
+[![Vite](https://img.shields.io/badge/Vite-6.0-646CFF?style=flat-square&logo=vite)](https://vitejs.dev)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.0-38B2AC?style=flat-square&logo=tailwind-css)](https://tailwindcss.com)
+[![Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-000000?style=flat-square&logo=vercel)](https://vercel.com)
+[![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)](LICENSE)
+
+**An enterprise-grade AI-powered quiz generation, assessment, and learning intelligence platform built for engineering education. Aligned with Bloom's Taxonomy and NBA Program Outcomes.**
+
+[🚀 Live Demo](#) · [📄 Patent Application](#patent) · [📊 Features](#features) · [🛠 Setup](#setup)
+
+</div>
+
+---
+
+## 📌 Table of Contents
+
+- [Overview](#overview)
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Project Structure](#project-structure)
+- [Getting Started](#getting-started)
+- [Environment Variables](#environment-variables)
+- [Firebase Setup](#firebase-setup)
+- [Deployment](#deployment)
+- [Patent Innovations](#patent)
+- [Screenshots](#screenshots)
+- [Contributors](#contributors)
+
+---
+
+## 🎯 Overview
+
+QuizForge is a full-stack web application that transforms traditional academic assessment into an intelligent, data-driven learning experience. Built specifically for engineering institutions under **Visvesvaraya Technological University (VTU)** and aligned with **NBA/NAAC accreditation** requirements.
+
+### What makes it different?
+
+| Feature | QuizForge | Kahoot! | Quizizz | Google Forms |
+|---|---|---|---|---|
+| Dual-Relationship Access Control | ✅ | ❌ | ❌ | ❌ |
+| Bloom's Taxonomy Auto-mapping | ✅ | ❌ | ❌ | ❌ |
+| Program Outcome Attainment | ✅ | ❌ | ❌ | ❌ |
+| AI Cognitive Profiling | ✅ | ❌ | ❌ | ❌ |
+| PDF/DOCX Tri-Modal Intelligence | ✅ | ❌ | Partial | ❌ |
+| Live Quiz with Anti-Cheat | ✅ | Partial | Partial | ❌ |
+| Subjective AI Grading | ✅ | ❌ | ❌ | ❌ |
+
+---
+
+## ✨ Features
+
+### 🔐 Authentication & Access Control
+- Email/password authentication via Firebase Auth
+- Two roles: **Teacher** and **Student**
+- **Dual-Relationship Access Control** — quiz visible only when student is (a) connected to teacher AND (b) matches target batch/year
+- Teacher code system + invite link for student connections
+- Two-step premium signup flow
+
+### 📝 Quiz Builder
+- Five question types: **MCQ, Fill-in-Blank, Q&A, Code, Puzzle/Ordering**
+- Per-question Bloom's Taxonomy tagging (Remember → Create)
+- Per-question Program Outcome mapping (PO1–PO11)
+- Quiz settings: time limits, negative marking, shuffling, live mode, target audience
+
+### 🤖 AI Question Generation
+Three difficulty control modes:
+- **Uniform** — all questions at same difficulty
+- **Distribution** — percentage split across difficulty levels
+- **Per-Question** — individual difficulty per question
+
+Difficulty framework with auto Bloom's + time mapping:
+| Level | Bloom's | Time |
+|---|---|---|
+| Easy | Remember / Understand | 40s |
+| Medium | Apply | 75s |
+| Hard | Analyze | 120s |
+| Very Hard | Evaluate / Create | 180s |
+
+Each generated question includes: Bloom's justification, PO justification, difficulty justification, syllabus unit, learning objective.
+
+### 📄 Tri-Modal Document Intelligence
+Upload PDF or DOCX and choose:
+- **Mode A** — Generate new questions from document content
+- **Mode B** — Extract existing questions from document
+- **Mode C** — Auto-solve questions found in document
+
+Supports PDF (via pdfjs-dist, up to 20 pages) and DOCX (via mammoth.js).
+
+### ⚡ Live Quiz Engine
+- Real-time student activity monitoring (Connected / Attempting / Not Started)
+- Per-question countdown timer with Start / Pause / Reset
+- Live response distribution per answer option
+- Teacher-controlled question progression synced to all students instantly
+- Student name badges for active participants
+
+### 🔴 Anti-Cheat System
+- Tab-switch detection via `visibilitychange` event listener
+- Violations logged to Firestore with timestamp
+- Warning shown to student after 3 violations
+- Anti-cheat log accessible to teacher post-session
+
+### 📊 Learning Intelligence Analytics
+The flagship feature — a full **Learning Intelligence Platform**:
+
+**Student 360° Profile (6 tabs):**
+| Tab | Content |
+|---|---|
+| Overview | Key metrics, learning pattern, AI narrative |
+| Cognitive | Bloom's radar chart, HOT index, mastery per level |
+| Questions | Per-question breakdown with time spent |
+| Behavior | Guessing detection, consistency, PO attainment |
+| Trends | SVG performance chart, growth metrics |
+| Recommendations | Risk-based interventions, weekly study plan |
+
+**Computed Metrics (20+):**
+- Accuracy rate, avg time/question, efficiency score
+- Learning velocity (improvement delta)
+- Consistency score (inverse std deviation)
+- Higher-Order Thinking Index
+- Difficulty-wise performance
+- Subject-wise performance
+- Risk level (High / Medium / Low)
+
+**Question Intelligence:**
+- Difficulty Index (p-value)
+- Discrimination Index (top 27% vs bottom 27%)
+- Distractor analysis with option selection bars
+- Quality flags: Too Easy, Too Difficult, Low Discrimination, High Skip Rate
+
+### 🎓 PO Attainment Dashboard (NBA-Compliant)
+- PO attainment heatmap with NBA 3-level scale (Level 0–3)
+- CO-PO matrix table
+- Trends view per PO
+- PDF export for NAAC/NBA accreditation submission
+
+### 🧠 Cognitive Profile
+- Per-student Bloom's mastery bars
+- PO attainment grid
+- Learning velocity indicator
+- Adaptive next-difficulty recommendation
+- AI-generated narrative insight
+
+### 🧩 Crossword Builder
+- LLM generates domain-specific clue-answer pairs
+- Constraint-satisfaction placement algorithm with adjacency conflict checks
+- Interactive keyboard navigation
+- Real-time correctness validation (green/red/yellow)
+- Click-clue-to-navigate functionality
+
+### 🏆 Other Features
+- Global and quiz-specific leaderboards
+- AI grading for Q&A and Code answers (score out of 10 + feedback)
+- Results page with animated score circle
+- Teacher-to-student announcements
+- Quiz Apps page (15 external learning tools)
+- Dark mode
+
+---
+
+## 🛠 Tech Stack
+
+### Frontend
+| Technology | Version | Purpose |
+|---|---|---|
+| React | 18.0 | UI framework |
+| Vite | 6.0 | Build tool |
+| React Router | 6.0 | Client-side routing |
+| Zustand | 4.0 | State management |
+| Tailwind CSS | 3.0 | Utility-first styling |
+| @dnd-kit | 6.0 | Drag-and-drop (puzzle questions) |
+| jsPDF | 2.0 | PDF export |
+| mammoth | latest | DOCX text extraction |
+| pdfjs-dist | latest | PDF text extraction |
+
+### Backend (Firebase BaaS)
+| Service | Purpose |
+|---|---|
+| Firebase Auth | User authentication & session management |
+| Cloud Firestore | NoSQL document database |
+| Firebase Security Rules | Database-level access control |
+
+### AI Providers
+| Provider | Model | Role |
+|---|---|---|
+| Groq | LLaMA-3.3-70B | Default — fast & free |
+| Google Gemini | gemini-2.0-flash | Alternate |
+| OpenAI | GPT-4o Mini | Alternate |
+
+### Deployment
+| Service | Purpose |
+|---|---|
+| Vercel | Frontend hosting with global CDN |
+| Firebase | Auth + Firestore on Google Cloud |
+
+---
+
+## 📁 Project Structure
+
+```
+quizforge/
+├── src/
+│   ├── pages/
+│   │   ├── Auth.jsx                 # Login + Signup (split-panel)
+│   │   ├── TeacherDashboard.jsx     # Teacher home
+│   │   ├── StudentDashboard.jsx     # Student home
+│   │   ├── QuizBuilder.jsx          # Quiz creation + AI generation
+│   │   ├── QuizAttempt.jsx          # Quiz taking with timer + anti-cheat
+│   │   ├── Results.jsx              # Score + review + AI grading
+│   │   ├── Analytics.jsx            # Learning Intelligence Platform
+│   │   ├── LiveQuiz.jsx             # Live quiz teacher control
+│   │   ├── CognitiveProfile.jsx     # Student cognitive fingerprint
+│   │   ├── POAttainment.jsx         # NBA PO attainment dashboard
+│   │   ├── Leaderboard.jsx          # Global + quiz leaderboards
+│   │   ├── Crossword.jsx            # AI crossword builder
+│   │   ├── Profile.jsx              # User profile + settings
+│   │   ├── StudentsConnected.jsx    # Teacher student management
+│   │   ├── MyTeachers.jsx           # Student teacher connections
+│   │   ├── JoinQuiz.jsx             # Join by code
+│   │   ├── ViewQuiz.jsx             # Teacher quiz review
+│   │   └── QuizApps.jsx             # External learning tools
+│   ├── components/
+│   │   ├── layout/index.jsx         # PageLayout, TopBar, BottomNav
+│   │   └── ui/index.jsx             # Spinner, Toggle, ProgressBar, Slider
+│   ├── services/
+│   │   ├── ai.js                    # LLM abstraction layer (Groq/Gemini/OpenAI)
+│   │   ├── firestore.js             # All Firestore CRUD operations
+│   │   └── firebase.js              # Firebase initialization
+│   ├── stores/
+│   │   ├── authStore.js             # Auth state (Zustand)
+│   │   └── appStore.js              # App state — dark mode, toasts
+│   ├── utils/
+│   │   ├── index.js                 # Scoring, crossword, PDF utils
+│   │   └── extractDocument.js       # PDF + DOCX text extraction
+│   ├── App.jsx                      # Routes + AuthGuard
+│   ├── main.jsx                     # Entry point
+│   └── index.css                    # Design system
+├── public/
+│   └── favicon.svg
+├── .env.example                     # Environment variable template
+├── firestore.rules                  # Firestore security rules
+├── vercel.json                      # SPA rewrite rule for Vercel
+├── package.json
+├── vite.config.js
+├── tailwind.config.js
+└── postcss.config.js
+```
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js v18 or later
+- npm v9 or later
+- A Firebase project (free Spark plan works)
+- A Groq API key (free at [console.groq.com](https://console.groq.com))
+
+### Installation
+
+**1. Clone the repository**
+```bash
+git clone https://github.com/YOUR_USERNAME/quizforge.git
+cd quizforge
+```
+
+**2. Install dependencies**
+```bash
+npm install --legacy-peer-deps
+```
+
+**3. Set up environment variables**
+```bash
+cp .env.example .env
+```
+Fill in your values in `.env` (see [Environment Variables](#environment-variables) section below).
+
+**4. Start the development server**
+```bash
+npm run dev
+```
+
+Open [http://localhost:5173](http://localhost:5173) in your browser.
+
+**5. Build for production**
+```bash
+npm run build
+```
+
+---
+
+## 🔑 Environment Variables
+
+Create a `.env` file in the root directory:
+
+```env
+# Firebase Configuration
+VITE_FIREBASE_API_KEY=your_firebase_api_key
+VITE_FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
+VITE_FIREBASE_PROJECT_ID=your_project_id
+VITE_FIREBASE_STORAGE_BUCKET=your_project.appspot.com
+VITE_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
+VITE_FIREBASE_APP_ID=your_app_id
+
+# AI Provider (groq | gemini | openai)
+VITE_AI_PROVIDER=groq
+
+# AI API Keys — only the active provider needs a key
+VITE_GROQ_API_KEY=your_groq_api_key
+VITE_GEMINI_API_KEY=your_gemini_api_key
+VITE_OPENAI_API_KEY=your_openai_api_key
+```
+
+Get your free Groq key at [console.groq.com](https://console.groq.com) → API Keys → Create Key.
+
+---
+
+## 🔥 Firebase Setup
+
+**1. Create a Firebase project**
+- Go to [firebase.google.com](https://firebase.google.com) → Add Project
+- Name it `quizforge` (or any name)
+
+**2. Enable Authentication**
+- Firebase Console → Authentication → Get Started
+- Enable **Email/Password** provider
+
+**3. Create Firestore Database**
+- Firebase Console → Firestore Database → Create Database
+- Start in **Test Mode** (we will add rules next)
+
+**4. Apply Security Rules**
+- Firebase Console → Firestore → Rules tab
+- Paste the contents of `firestore.rules` from this repo
+- Click **Publish**
+
+**5. Get your config keys**
+- Firebase Console → Project Settings → Your Apps → Web App
+- Copy the `firebaseConfig` object values into your `.env` file
+
+---
+
+## 🌐 Deployment
+
+### Deploy to Vercel (Recommended)
+
+**Option 1 — Via GitHub (Auto-deploy)**
+
+1. Push your code to GitHub
+2. Go to [vercel.com](https://vercel.com) → New Project
+3. Import your GitHub repository
+4. Framework preset: **Vite**
+5. Add all environment variables from your `.env` file
+6. Click **Deploy**
+
+**Option 2 — Via Vercel CLI**
+```bash
+npm install -g vercel
+vercel --prod
+```
+
+The `vercel.json` file is already configured with the SPA rewrite rule:
+```json
+{
+  "rewrites": [{ "source": "/(.*)", "destination": "/" }]
+}
+```
+
+---
+
+## 🗄 Firestore Collections
+
+| Collection | Description |
+|---|---|
+| `users` | User profiles with role, academic details, teacher code |
+| `quizzes` | Quiz documents with questions, settings, PO/Bloom's tags |
+| `attempts` | Student submissions with answers, scores, time per question |
+| `connections` | Teacher-student relationships with status |
+| `announcements` | Teacher-to-student messages |
+| `live_sessions` | Real-time quiz state for live mode |
+| `cognitive_profiles` | Per-student learning fingerprints |
+| `po_attainment` | NBA PO measurement records |
+| `anti_cheat_logs` | Tab-switch violation records |
+
+---
+
+## 📜 Patent Innovations <a name="patent"></a>
+
+QuizForge contains **6 patentable innovation clusters** filed under the India Patents Act 1970:
+
+**Cluster 1 — Dual-Relationship Academic Intelligence Engine**
+Novel access control enforcing simultaneous connection + batch/year verification.
+
+**Cluster 2 — Adaptive Cognitive Profiling Engine**
+Per-student fingerprint across 6 Bloom's levels + 11 POs with learning velocity and adaptive difficulty.
+
+**Cluster 3 — Tri-Modal Document Intelligence Pipeline**
+Single pipeline: PDF/DOCX → Mode A (generate) / Mode B (extract) / Mode C (solve).
+
+**Cluster 4 — Synchronized Live Assessment Engine**
+Bidirectional real-time quiz with teacher timer control, live response distribution, and tab-switch anti-cheat.
+
+**Cluster 5 — Automated PO Attainment Measurement System**
+NBA-compliant CO-PO matrix auto-generated from quiz attempt data.
+
+**Cluster 6 — AI-Crossword Academic Puzzle Engine**
+LLM clue generation + constraint-satisfaction grid placement with real-time validation.
+
+---
+
+## 👥 Contributors
+
+| Name | USN | Role |
+|---|---|---|
+| Raju Kumar | 1DS22AI049 | Full Stack Development |
+| Shilu Varghese | 1DS22AI050 | AI Integration & Analytics |
+| Priya Nair | 1DS22AI051 | UI/UX & Firebase |
+| Arjun Sharma | 1DS22AI052 | Quiz Engine & Live Mode |
+
+**Guide:** Dr. Reshma S, Associate Professor
+**Institution:** Dayananda Sagar College of Engineering, Bengaluru
+**Department:** Artificial Intelligence & Machine Learning
+**Course:** Mini Project-I (22AI49), VTU 2025-26
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
+
+---
+
+## 🙏 Acknowledgements
+
+- [Groq](https://groq.com) — Free LLM API for question generation
+- [Firebase](https://firebase.google.com) — Backend infrastructure
+- [Vercel](https://vercel.com) — Hosting platform
+- [pdfjs-dist](https://github.com/mozilla/pdf.js) — PDF text extraction
+- [mammoth.js](https://github.com/mwilliamson/mammoth.js) — DOCX extraction
+- [dnd-kit](https://dndkit.com) — Drag and drop
+
+---
+
+<div align="center">
+
+Made with ❤️ by the QuizForge Team · DSCE, Bengaluru · 2025-26
+
+⭐ Star this repo if you found it useful!
+
+</div>
